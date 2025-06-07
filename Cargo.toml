@@ -1,0 +1,40 @@
+[package]
+name = "rust-build-optimizer"
+version = "0.1.0"
+edition = "2021"
+authors = ["Austin Songer <austin@songer.me>"]
+description = "A comprehensive Rust build optimization tool that dramatically improves build times and development workflow"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/austinsonger/rust-build-optimizer"
+homepage = "https://github.com/austinsonger/rust-build-optimizer"
+documentation = "https://docs.rs/rust-build-optimizer"
+readme = "README.md"
+keywords = ["rust", "build", "optimization", "performance", "cargo"]
+categories = ["development-tools", "development-tools::build-utils", "command-line-utilities"]
+exclude = ["target/", ".git/", "*.log"]
+
+[[bin]]
+name = "rust-build-optimizer"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.4", features = ["derive", "color"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+anyhow = "1.0"
+thiserror = "1.0"
+colored = "2.0"
+indicatif = "0.17"
+dialoguer = "0.11"
+which = "4.4"
+tempfile = "3.8"
+toml = "0.8"
+regex = "1.10"
+walkdir = "2.4"
+chrono = { version = "0.4", features = ["serde"] }
+log = "0.4"
+env_logger = "0.10"
+dirs = "5.0"
+num_cpus = "1.16"
+# Removing duplicate walkdir entry

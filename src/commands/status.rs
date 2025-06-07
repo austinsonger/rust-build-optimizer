@@ -56,7 +56,7 @@ fn print_status_overview(system_info: &SystemInfo, detailed: bool) {
         } else {
             "❌ Not installed".bright_red()
         };
-        
+
         if detailed && tool.is_installed {
             if let Some(ref version) = tool.version {
                 println!("  {} - {} ({})", tool.name.bright_cyan(), status, version);
@@ -70,15 +70,18 @@ fn print_status_overview(system_info: &SystemInfo, detailed: bool) {
     println!();
 
     // Recommendations
-    let missing_tools: Vec<_> = system_info.available_tools
+    let missing_tools: Vec<_> = system_info
+        .available_tools
         .iter()
         .filter(|tool| !tool.is_installed)
         .collect();
 
     if !missing_tools.is_empty() {
         println!("{}", "💡 Recommendations".bright_yellow().bold());
-        println!("  Install missing tools with: {}", 
-            "rust-build-optimizer install-tools".bright_cyan());
+        println!(
+            "  Install missing tools with: {}",
+            "rust-build-optimizer install-tools".bright_cyan()
+        );
         for tool in missing_tools {
             println!("    • {}", tool.name);
         }

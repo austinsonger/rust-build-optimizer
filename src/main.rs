@@ -240,35 +240,35 @@ async fn main() -> OptimizerResult<()> {
 
     // Execute command
     match cli.command {
-        Commands::Initialize { no_backup, no_tools, force } => {
-            initialize::run(cli.project_dir, no_backup, no_tools, force).await
-        }
-        Commands::InstallTools { list, only } => {
-            tools::run(list, only).await
-        }
-        Commands::Build { build_type } => {
-            build::run(build_type, cli.project_dir).await
-        }
+        Commands::Initialize {
+            no_backup,
+            no_tools,
+            force,
+        } => initialize::run(cli.project_dir, no_backup, no_tools, force).await,
+        Commands::InstallTools { list, only } => tools::run(list, only).await,
+        Commands::Build { build_type } => build::run(build_type, cli.project_dir).await,
         Commands::Development { dev_command } => {
             development::run(dev_command, cli.project_dir).await
         }
-        Commands::Optimize { all, clean, deps, benchmark } => {
-            optimize::run(all, clean, deps, benchmark, cli.project_dir).await
-        }
-        Commands::Status { detailed, json } => {
-            status::run(detailed, json, cli.project_dir).await
-        }
+        Commands::Optimize {
+            all,
+            clean,
+            deps,
+            benchmark,
+        } => optimize::run(all, clean, deps, benchmark, cli.project_dir).await,
+        Commands::Status { detailed, json } => status::run(detailed, json, cli.project_dir).await,
         Commands::Config { config_command } => {
-            config::run(config_command, cli.project_dir).await
+            commands::config::run(config_command, cli.project_dir).await
         }
-        Commands::Update { check } => {
-            update::run(check).await
-        }
+        Commands::Update { check } => update::run(check).await,
     }
 }
 
 fn print_banner() {
     println!("{}", "🚀 Rust Build Optimizer".bright_blue().bold());
-    println!("{}", "Dramatically improve your Rust build times and development workflow".bright_black());
+    println!(
+        "{}",
+        "Dramatically improve your Rust build times and development workflow".bright_black()
+    );
     println!();
 }

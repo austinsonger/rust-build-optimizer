@@ -24,7 +24,8 @@ pub async fn run(
     if all || deps {
         print_status("Checking for unused dependencies...");
         if is_tool_available("cargo-udeps") {
-            let _ = execute_command_with_output("cargo", &["+nightly", "udeps", "--all-targets"], None);
+            let _ =
+                execute_command_with_output("cargo", &["+nightly", "udeps", "--all-targets"], None);
         } else {
             print_warning("cargo-udeps not installed. Install with: cargo install cargo-udeps");
         }

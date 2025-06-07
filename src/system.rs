@@ -1,4 +1,4 @@
-use crate::error::{OptimizerError, OptimizerResult};
+use crate::error::OptimizerResult;
 use serde::{Deserialize, Serialize};
 use std::process::Command;
 use which::which;
@@ -192,7 +192,8 @@ fn detect_available_tools() -> Vec<AvailableTool> {
 fn get_tool_version(tool: &str) -> Option<String> {
     let version_args = match tool {
         "sccache" => vec!["--version"],
-        "cargo-nextest" | "cargo-udeps" | "cargo-hakari" | "cargo-watch" | "cargo-expand" | "cargo-bloat" => {
+        "cargo-nextest" | "cargo-udeps" | "cargo-hakari" | "cargo-watch" | "cargo-expand"
+        | "cargo-bloat" => {
             vec!["--version"]
         }
         "lld" => vec!["--version"],
@@ -208,14 +209,10 @@ fn get_tool_version(tool: &str) -> Option<String> {
         .ok()
         .and_then(|output| {
             if output.status.success() {
-                String::from_utf8(output.stdout)
-                    .ok()
-                    .and_then(|s| {
-                        // Extract version number from output
-                        s.lines()
-                            .next()
-                            .map(|line| line.trim().to_string())
-                    })
+                String::from_utf8(output.stdout).ok().and_then(|s| {
+                    // Extract version number from output
+                    s.lines().next().map(|line| line.trim().to_string())
+                })
             } else {
                 None
             }

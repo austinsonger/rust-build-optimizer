@@ -8,9 +8,13 @@ pub async fn run(check: bool) -> OptimizerResult<()> {
         print_success("✅ You are running the latest version");
     } else {
         print_status("Updating rust-build-optimizer...");
-        execute_command_with_output("cargo", &["install", "rust-build-optimizer", "--force"], None)?;
+        execute_command_with_output(
+            "cargo",
+            &["install", "rust-build-optimizer", "--force"],
+            None,
+        )?;
         print_success("✅ rust-build-optimizer updated successfully");
     }
-    
+
     Ok(())
 }

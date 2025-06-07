@@ -1,0 +1,31 @@
+# Git hooks for maintaining code quality
+
+#!/bin/sh
+# Pre-commit hook to run cargo fmt and clippy
+
+set -e
+
+echo "Running pre-commit checks..."
+
+# Check if cargo fmt is available
+if command -v cargo >/dev/null 2>&1; then
+    echo "Checking code formatting..."
+    if ! cargo fmt -- --check; then
+        echo "❌ Code formatting issues found. Run 'cargo fmt' to fix them."
+        exit 1
+    fi
+
+    echo "Running Clippy..."
+    if ! cargo clippy --all-targets --all-features -- -D warnings; then
+        echo "❌ Clippy found issues. Please fix them before committing."
+        exit 1
+    fi
+
+    echo "Running tests..."
+    if ! cargo test; then
+        echo "❌ Tests failed. Please fix them before committing."
+        exit 1
+    fi
+fi
+
+echo "✅ All pre-commit checks passed!"

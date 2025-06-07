@@ -2,7 +2,7 @@
 
 [![Crates.io](https://img.shields.io/crates/v/rust-build-optimizer.svg)](https://crates.io/crates/rust-build-optimizer)
 [![Documentation](https://docs.rs/rust-build-optimizer/badge.svg)](https://docs.rs/rust-build-optimizer)
-[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg)](LICENSE)
+
 
 A comprehensive Rust build optimization tool that dramatically improves build times and development workflow through intelligent configuration, tool management, and performance monitoring.
 

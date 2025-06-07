@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] - 2024-01-XX
+## [0.1.0] - ####
 
 ### Added
 - Initial release of rust-build-optimizer
@@ -55,5 +55,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Progress indication with indicatif
 - Interactive prompts with dialoguer
 
-[Unreleased]: https://github.com/austinsonger/rust-build-optimizer/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/austinsonger/rust-build-optimizer/releases/tag/v0.1.0
+[Unreleased]: 
+[0.1.0]: 

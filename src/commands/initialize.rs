@@ -1,7 +1,8 @@
-use crate::config::{OptimizerConfig, generate_cargo_config, generate_cargo_profiles};
+use crate::config::{generate_cargo_config, generate_cargo_profiles, OptimizerConfig};
 use crate::error::{OptimizerError, OptimizerResult};
 use crate::system::SystemInfo;
 use crate::utils::*;
+use colored::Colorize;
 use std::fs;
 use std::path::{Path, PathBuf};
 
@@ -17,19 +18,24 @@ pub async fn run(
         find_rust_project_root(".")?
     };
 
-    print_status(&format!("Initializing optimization for project: {}", project_root.display()));
+    print_status(&format!(
+        "Initializing optimization for project: {}",
+        project_root.display()
+    ));
 
     // Validate that this is a Rust project
     if !is_rust_project(&project_root) {
         return Err(OptimizerError::project_validation(
-            "No Cargo.toml found. Please run this command from a Rust project directory."
+            "No Cargo.toml found. Please run this command from a Rust project directory.",
         ));
     }
 
     // Detect system information
     let system_info = SystemInfo::detect()?;
-    print_status(&format!("Detected system: {} {} with {} CPU cores", 
-        system_info.os, system_info.arch, system_info.cpu_cores));
+    print_status(&format!(
+        "Detected system: {} {} with {} CPU cores",
+        system_info.os, system_info.arch, system_info.cpu_cores
+    ));
 
     // Load or create configuration
     let config = OptimizerConfig::load_or_default()?;
@@ -103,21 +109,24 @@ fn install_cargo_config(
 
     // Write configuration file
     fs::write(&config_path, config_content)?;
-    print_success(&format!("Installed optimized Cargo config: {}", config_path.display()));
+    print_success(&format!(
+        "Installed optimized Cargo config: {}",
+        config_path.display()
+    ));
 
     Ok(())
 }
 
 fn install_cargo_profiles(project_root: &Path, force: bool) -> OptimizerResult<()> {
     let cargo_toml_path = project_root.join("Cargo.toml");
-    
+
     if !cargo_toml_path.exists() {
         return Err(OptimizerError::file_not_found("Cargo.toml"));
     }
 
     // Read existing Cargo.toml
     let existing_content = fs::read_to_string(&cargo_toml_path)?;
-    
+
     // Check if profiles already exist
     if existing_content.contains("[profile.dev]") && !force {
         if !confirm("Cargo.toml already contains profiles. Add optimized profiles anyway?")? {
@@ -147,10 +156,13 @@ fn install_cargo_profiles(project_root: &Path, force: bool) -> OptimizerResult<(
 
 fn create_scripts_directory(project_root: &Path) -> OptimizerResult<()> {
     let scripts_dir = project_root.join("scripts");
-    
+
     if !scripts_dir.exists() {
         fs::create_dir_all(&scripts_dir)?;
-        print_status(&format!("Created scripts directory: {}", scripts_dir.display()));
+        print_status(&format!(
+            "Created scripts directory: {}",
+            scripts_dir.display()
+        ));
     }
 
     // Create a simple build script as an example
@@ -190,7 +202,7 @@ case "${1:-check}" in
 esac
 "#;
         fs::write(&build_script_path, build_script_content)?;
-        
+
         // Make script executable on Unix systems
         #[cfg(unix)]
         {
@@ -199,8 +211,11 @@ esac
             perms.set_mode(0o755);
             fs::set_permissions(&build_script_path, perms)?;
         }
-        
-        print_success(&format!("Created build script: {}", build_script_path.display()));
+
+        print_success(&format!(
+            "Created build script: {}",
+            build_script_path.display()
+        ));
     }
 
     Ok(())
@@ -211,16 +226,43 @@ fn print_next_steps() {
     print_success("🎉 Rust Build Optimization initialized successfully!");
     println!();
     println!("📋 Next steps:");
-    println!("   1. Test the optimizations: {}", "rust-build-optimizer build check".bright_green());
-    println!("   2. Run development workflow: {}", "rust-build-optimizer dev watch".bright_green());
-    println!("   3. Check optimization status: {}", "rust-build-optimizer status".bright_green());
-    println!("   4. View configuration: {}", "rust-build-optimizer config show".bright_green());
+    println!(
+        "   1. Test the optimizations: {}",
+        "rust-build-optimizer build check".bright_green()
+    );
+    println!(
+        "   2. Run development workflow: {}",
+        "rust-build-optimizer dev watch".bright_green()
+    );
+    println!(
+        "   3. Check optimization status: {}",
+        "rust-build-optimizer status".bright_green()
+    );
+    println!(
+        "   4. View configuration: {}",
+        "rust-build-optimizer config show".bright_green()
+    );
     println!();
     println!("🚀 Quick commands:");
-    println!("   {} - Fast syntax check", "rust-build-optimizer dev quick-check".bright_cyan());
-    println!("   {} - Optimized build", "rust-build-optimizer build build".bright_cyan());
-    println!("   {} - Fast testing", "rust-build-optimizer build test".bright_cyan());
-    println!("   {} - Continuous development", "rust-build-optimizer dev watch".bright_cyan());
+    println!(
+        "   {} - Fast syntax check",
+        "rust-build-optimizer dev quick-check".bright_cyan()
+    );
+    println!(
+        "   {} - Optimized build",
+        "rust-build-optimizer build build".bright_cyan()
+    );
+    println!(
+        "   {} - Fast testing",
+        "rust-build-optimizer build test".bright_cyan()
+    );
+    println!(
+        "   {} - Continuous development",
+        "rust-build-optimizer dev watch".bright_cyan()
+    );
     println!();
-    println!("📚 For help: {}", "rust-build-optimizer --help".bright_yellow());
+    println!(
+        "📚 For help: {}",
+        "rust-build-optimizer --help".bright_yellow()
+    );
 }

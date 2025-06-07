@@ -1,5 +1,5 @@
-use thiserror::Error;
 use std::io;
+use thiserror::Error;
 
 pub type OptimizerResult<T> = Result<T, OptimizerError>;
 

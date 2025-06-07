@@ -1,0 +1,17 @@
+name: "Custom CodeQL Configuration"
+queries:
+  - uses: security-and-quality
+  - uses: security-extended
+
+query-filters:
+  - exclude:
+      id: cpp/unused-local-variable
+
+paths-ignore:
+  - target/
+  - "**/*.md"
+  - "**/*.txt"
+  - ".github/"
+
+paths:
+  - src/

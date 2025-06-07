@@ -2,6 +2,7 @@
 name = "rust-build-optimizer"
 version = "0.1.0"
 edition = "2021"
+rust-version = "1.70"
 authors = ["Austin Songer <austin@songer.me>"]
 description = "A comprehensive Rust build optimization tool that dramatically improves build times and development workflow"
 license = "MIT OR Apache-2.0"
@@ -11,7 +12,7 @@ documentation = "https://docs.rs/rust-build-optimizer"
 readme = "README.md"
 keywords = ["rust", "build", "optimization", "performance", "cargo"]
 categories = ["development-tools", "development-tools::build-utils", "command-line-utilities"]
-exclude = ["target/", ".git/", "*.log"]
+exclude = ["target/", ".git/", "*.log", ".github/", "tests/fixtures/"]
 
 [[bin]]
 name = "rust-build-optimizer"
@@ -37,4 +38,47 @@ log = "0.4"
 env_logger = "0.10"
 dirs = "5.0"
 num_cpus = "1.16"
-# Removing duplicate walkdir entry
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+assert_cmd = "2.0"
+predicates = "3.0"
+tempfile = "3.8"
+
+# Benchmarks
+[[bench]]
+name = "optimization_bench"
+harness = false
+
+# Profile optimizations
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[profile.dev]
+debug = true
+overflow-checks = true
+
+[profile.test]
+debug = true
+
+# Features
+[features]
+default = []
+# Add features as needed
+
+# Workspace configuration for potential future expansion
+[workspace]
+members = ["."]
+
+# Metadata for docs.rs
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+# Metadata for cargo-binstall
+[package.metadata.binstall]
+pkg-url = "{ repo }/releases/download/v{ version }/{ name }-{ target }.{ archive-format }"
+bin-dir = "{ bin }{ binary-ext }"

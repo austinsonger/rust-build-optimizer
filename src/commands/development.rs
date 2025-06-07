@@ -13,14 +13,28 @@ pub async fn run(dev_command: DevCommands, project_dir: Option<PathBuf>) -> Opti
     match dev_command {
         DevCommands::QuickCheck => {
             print_status("Running ultra-fast syntax check...");
-            execute_command_with_output("cargo", &["check", "--lib", "--bins", "--workspace", "--message-format=short"], None)?;
+            execute_command_with_output(
+                "cargo",
+                &[
+                    "check",
+                    "--lib",
+                    "--bins",
+                    "--workspace",
+                    "--message-format=short",
+                ],
+                None,
+            )?;
             print_success("✅ Quick check completed");
             Ok(())
         }
         DevCommands::Watch { paths: _ } => {
             print_status("Starting watch mode...");
             if is_tool_available("cargo-watch") {
-                execute_command_with_output("cargo", &["watch", "-x", "check --workspace --message-format=short"], None)?;
+                execute_command_with_output(
+                    "cargo",
+                    &["watch", "-x", "check --workspace --message-format=short"],
+                    None,
+                )?;
             } else {
                 print_warning("cargo-watch not installed. Install with: cargo install cargo-watch");
             }

@@ -4,7 +4,10 @@ use crate::utils::*;
 use crate::ConfigCommands;
 use std::path::PathBuf;
 
-pub async fn run(config_command: ConfigCommands, _project_dir: Option<PathBuf>) -> OptimizerResult<()> {
+pub async fn run(
+    config_command: ConfigCommands,
+    _project_dir: Option<PathBuf>,
+) -> OptimizerResult<()> {
     match config_command {
         ConfigCommands::Show => {
             let config = OptimizerConfig::load_or_default()?;
@@ -13,8 +16,11 @@ pub async fn run(config_command: ConfigCommands, _project_dir: Option<PathBuf>) 
         }
         ConfigCommands::Edit => {
             let config_path = OptimizerConfig::get_config_path()?;
-            print_status(&format!("Edit configuration file: {}", config_path.display()));
-            
+            print_status(&format!(
+                "Edit configuration file: {}",
+                config_path.display()
+            ));
+
             // Try to open with default editor
             if let Ok(editor) = std::env::var("EDITOR") {
                 execute_command_with_output(&editor, &[config_path.to_str().unwrap()], None)?;
@@ -40,10 +46,13 @@ pub async fn run(config_command: ConfigCommands, _project_dir: Option<PathBuf>) 
         ConfigCommands::Export { output } => {
             let config = OptimizerConfig::load_or_default()?;
             let content = toml::to_string_pretty(&config)?;
-            
+
             if let Some(output_path) = output {
                 std::fs::write(&output_path, content)?;
-                print_success(&format!("✅ Configuration exported to {}", output_path.display()));
+                print_success(&format!(
+                    "✅ Configuration exported to {}",
+                    output_path.display()
+                ));
             } else {
                 println!("{}", content);
             }

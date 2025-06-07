@@ -118,7 +118,7 @@ enum Commands {
         config_command: ConfigCommands,
     },
 
-    /// Update rust-build-optimizer to the latest version
+    /// Update Atlas to the latest version
     Update {
         /// Check for updates without installing
         #[arg(long)]

@@ -7,13 +7,13 @@ pub async fn run(check: bool) -> OptimizerResult<()> {
         // Implementation for checking updates
         print_success("✅ You are running the latest version");
     } else {
-        print_status("Updating rust-build-optimizer...");
+        print_status("Updating Atlas...");
         execute_command_with_output(
             "cargo",
-            &["install", "rust-build-optimizer", "--force"],
+            &["install", "atlas", "--force"],
             None,
         )?;
-        print_success("✅ rust-build-optimizer updated successfully");
+        print_success("✅ Atlas updated successfully");
     }
 
     Ok(())

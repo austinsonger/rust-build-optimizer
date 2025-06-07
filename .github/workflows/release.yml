@@ -88,18 +88,18 @@ jobs:
 
     - name: Strip binary (Unix)
       if: matrix.os != 'windows-latest'
-      run: strip target/${{ matrix.target }}/release/rust-build-optimizer${{ matrix.suffix }}
+      run: strip target/${{ matrix.target }}/release/atlas${{ matrix.suffix }}
 
     - name: Create archive
       id: archive
       run: |
-        ARCHIVE_NAME="rust-build-optimizer-${{ matrix.target }}"
+        ARCHIVE_NAME="atlas-${{ matrix.target }}"
         if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-          7z a "${ARCHIVE_NAME}.zip" ./target/${{ matrix.target }}/release/rust-build-optimizer${{ matrix.suffix }}
+          7z a "${ARCHIVE_NAME}.zip" ./target/${{ matrix.target }}/release/atlas${{ matrix.suffix }}
           echo "archive_name=${ARCHIVE_NAME}.zip" >> $GITHUB_OUTPUT
           echo "archive_path=${ARCHIVE_NAME}.zip" >> $GITHUB_OUTPUT
         else
-          tar czf "${ARCHIVE_NAME}.tar.gz" -C ./target/${{ matrix.target }}/release rust-build-optimizer${{ matrix.suffix }}
+          tar czf "${ARCHIVE_NAME}.tar.gz" -C ./target/${{ matrix.target }}/release atlas${{ matrix.suffix }}
           echo "archive_name=${ARCHIVE_NAME}.tar.gz" >> $GITHUB_OUTPUT
           echo "archive_path=${ARCHIVE_NAME}.tar.gz" >> $GITHUB_OUTPUT
         fi
@@ -154,7 +154,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ${{ secrets.DOCKER_USERNAME }}/rust-build-optimizer
+        images: ${{ secrets.DOCKER_USERNAME }}/atlas
         tags: |
           type=ref,event=tag
           type=semver,pattern={{version}}

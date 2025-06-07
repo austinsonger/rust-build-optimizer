@@ -1,4 +1,4 @@
-# Makefile for rust-build-optimizer development
+# Makefile for Atlas development
 
 .PHONY: help install build test check fmt clippy clean release docker audit deps update bench docs serve-docs setup-hooks
 
@@ -41,10 +41,10 @@ release: ## Create a release build with optimizations
 	cargo build --release
 
 docker: ## Build Docker image
-	docker build -t rust-build-optimizer .
+	docker build -t atlas .
 
 docker-run: ## Run Docker container
-	docker run --rm -it rust-build-optimizer
+	docker run --rm -it atlas
 
 audit: ## Run security audit
 	cargo audit

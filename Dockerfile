@@ -1,4 +1,4 @@
-# Dockerfile for rust-build-optimizer
+# Dockerfile for Atlas
 FROM rust:1.75-slim as builder
 
 WORKDIR /app
@@ -16,7 +16,7 @@ COPY Cargo.toml Cargo.lock ./
 RUN mkdir src && echo "fn main() {}" > src/main.rs
 
 # Build dependencies (this layer will be cached)
-RUN cargo build --release && rm -rf src target/release/deps/rust_build_optimizer*
+RUN cargo build --release && rm -rf src target/release/deps/atlas*
 
 # Copy source code
 COPY src ./src
@@ -37,12 +37,12 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the binary from builder stage
-COPY --from=builder /app/target/release/rust-build-optimizer /usr/local/bin/rust-build-optimizer
+COPY --from=builder /app/target/release/atlas /usr/local/bin/atlas
 
 # Create non-root user
 RUN useradd -r -s /bin/false rustopt
 
 USER rustopt
 
-ENTRYPOINT ["rust-build-optimizer"]
+ENTRYPOINT ["atlas"]
 CMD ["--help"]

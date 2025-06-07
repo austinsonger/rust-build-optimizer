@@ -13,7 +13,7 @@ use error::OptimizerResult;
 
 #[derive(Parser)]
 #[command(
-    name = "rust-build-optimizer",
+    name = "atlas",
     about = "🚀 A comprehensive Rust build optimization tool",
     long_about = "A comprehensive Rust build optimization tool that dramatically improves build times and development workflow through intelligent configuration, tool management, and performance monitoring.",
     version
@@ -265,7 +265,7 @@ async fn main() -> OptimizerResult<()> {
 }
 
 fn print_banner() {
-    println!("{}", "🚀 Rust Build Optimizer".bright_blue().bold());
+    println!("{}", "🚀 Atlas".bright_blue().bold());
     println!(
         "{}",
         "Dramatically improve your Rust build times and development workflow".bright_black()

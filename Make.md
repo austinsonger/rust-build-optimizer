@@ -1,6 +1,6 @@
 # 🔧 Makefile Documentation
 
-This document explains how to use the Makefile in the rust-build-optimizer project for development, testing, and release workflows.
+This document explains how to use the Makefile in the Atlas project for development, testing, and release workflows.
 
 ## 🚀 **Quick Start**
 

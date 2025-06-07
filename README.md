@@ -1,7 +1,7 @@
-# 🚀 Rust Build Optimizer
+# 🚀 Atlas
 
-[![Crates.io](https://img.shields.io/crates/v/rust-build-optimizer.svg)](https://crates.io/crates/rust-build-optimizer)
-[![Documentation](https://docs.rs/rust-build-optimizer/badge.svg)](https://docs.rs/rust-build-optimizer)
+[![Crates.io](https://img.shields.io/crates/v/atlas.svg)](https://crates.io/crates/atlas)
+[![Documentation](https://docs.rs/atlas/badge.svg)](https://docs.rs/atlas)
 
 
 A comprehensive Rust build optimization tool that dramatically improves build times and development workflow through intelligent configuration, tool management, and performance monitoring.
@@ -17,10 +17,10 @@ A comprehensive Rust build optimization tool that dramatically improves build ti
 
 ## 📦 Installation
 
-Install rust-build-optimizer using Cargo:
+Install Atlas using Cargo:
 
 ```bash
-cargo install rust-build-optimizer
+cargo install atlas
 ```
 
 ## 🚀 Quick Start
@@ -30,7 +30,7 @@ cargo install rust-build-optimizer
 Navigate to your Rust project and run:
 
 ```bash
-rust-build-optimizer initialize
+atlas initialize
 ```
 
 This will:
@@ -44,26 +44,26 @@ This will:
 
 ```bash
 # Fast syntax check
-rust-build-optimizer dev quick-check
+atlas dev quick-check
 
 # Optimized build
-rust-build-optimizer build build
+atlas build build
 
 # Fast testing with cargo-nextest
-rust-build-optimizer build test
+atlas build test
 
 # Continuous development with watch mode
-rust-build-optimizer dev watch
+atlas dev watch
 ```
 
 ### 3. Monitor Performance
 
 ```bash
 # Check optimization status
-rust-build-optimizer status
+atlas status
 
 # Detailed performance analysis
-rust-build-optimizer dev profile
+atlas dev profile
 ```
 
 ## 📈 Performance Improvements
@@ -81,40 +81,40 @@ rust-build-optimizer dev profile
 
 ### Build Commands
 ```bash
-rust-build-optimizer build check      # Fast cargo check
-rust-build-optimizer build build      # Optimized cargo build
-rust-build-optimizer build test       # Fast testing with nextest
-rust-build-optimizer build clean      # Clean build artifacts
+atlas build check      # Fast cargo check
+atlas build build      # Optimized cargo build
+atlas build test       # Fast testing with nextest
+atlas build clean      # Clean build artifacts
 ```
 
 ### Development Workflow
 ```bash
-rust-build-optimizer dev quick-check  # Ultra-fast syntax check
-rust-build-optimizer dev watch        # Continuous development
-rust-build-optimizer dev profile      # Build performance analysis
-rust-build-optimizer dev clean-build  # Clean optimized build
+atlas dev quick-check  # Ultra-fast syntax check
+atlas dev watch        # Continuous development
+atlas dev profile      # Build performance analysis
+atlas dev clean-build  # Clean optimized build
 ```
 
 ### Tool Management
 ```bash
-rust-build-optimizer install-tools           # Install all recommended tools
-rust-build-optimizer install-tools --list    # List available tools
-rust-build-optimizer install-tools --only sccache,cargo-nextest  # Install specific tools
+atlas install-tools           # Install all recommended tools
+atlas install-tools --list    # List available tools
+atlas install-tools --only sccache,cargo-nextest  # Install specific tools
 ```
 
 ### Configuration
 ```bash
-rust-build-optimizer config show      # Show current configuration
-rust-build-optimizer config edit      # Edit configuration
-rust-build-optimizer config validate  # Validate configuration
-rust-build-optimizer config reset     # Reset to defaults
+atlas config show      # Show current configuration
+atlas config edit      # Edit configuration
+atlas config validate  # Validate configuration
+atlas config reset     # Reset to defaults
 ```
 
 ### Status & Monitoring
 ```bash
-rust-build-optimizer status           # Show optimization status
-rust-build-optimizer status --detailed # Detailed system information
-rust-build-optimizer status --json    # JSON output for scripting
+atlas status           # Show optimization status
+atlas status --detailed # Detailed system information
+atlas status --json    # JSON output for scripting
 ```
 
 ## 🔧 What Gets Optimized
@@ -158,10 +158,10 @@ rust-build-optimizer status --json    # JSON output for scripting
 
 ## 📊 Configuration
 
-rust-build-optimizer uses a TOML configuration file located at:
-- **macOS**: `~/Library/Application Support/rust-build-optimizer/config.toml`
-- **Linux**: `~/.config/rust-build-optimizer/config.toml`
-- **Windows**: `%APPDATA%\rust-build-optimizer\config.toml`
+Atlas uses a TOML configuration file located at:
+- **macOS**: `~/Library/Application Support/atlas/config.toml`
+- **Linux**: `~/.config/atlas/config.toml`
+- **Windows**: `%APPDATA%\atlas\config.toml`
 
 ### Example Configuration
 
@@ -197,37 +197,37 @@ quick_check_on_save = true
 ### Build Errors
 ```bash
 # Check for compilation errors
-rust-build-optimizer build check
+atlas build check
 
 # Validate configuration
-rust-build-optimizer config validate
+atlas config validate
 
 # Reset configuration if needed
-rust-build-optimizer config reset --force
+atlas config reset --force
 ```
 
 ### Performance Issues
 ```bash
 # Profile build performance
-rust-build-optimizer dev profile
+atlas dev profile
 
 # Check tool installation status
-rust-build-optimizer status --detailed
+atlas status --detailed
 
 # Clean and rebuild
-rust-build-optimizer build clean --all
+atlas build clean --all
 ```
 
 ### Tool Installation Issues
 ```bash
 # List available tools and their status
-rust-build-optimizer install-tools --list
+atlas install-tools --list
 
 # Install tools manually
 cargo install sccache cargo-nextest --locked
 
 # Check system requirements
-rust-build-optimizer status
+atlas status
 ```
 
 ## 🤝 Contributing

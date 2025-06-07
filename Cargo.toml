@@ -1,21 +1,21 @@
 [package]
-name = "rust-build-optimizer"
+name = "atlas"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.70"
 authors = ["Austin Songer <austin@songer.me>"]
 description = "A comprehensive Rust build optimization tool that dramatically improves build times and development workflow"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/austinsonger/rust-build-optimizer"
-homepage = "https://github.com/austinsonger/rust-build-optimizer"
-documentation = "https://docs.rs/rust-build-optimizer"
+repository = "https://github.com/austinsonger/atlas"
+homepage = "https://github.com/austinsonger/atlas"
+documentation = "https://docs.rs/atlas"
 readme = "README.md"
 keywords = ["rust", "build", "optimization", "performance", "cargo"]
 categories = ["development-tools", "development-tools::build-utils", "command-line-utilities"]
 exclude = ["target/", ".git/", "*.log", ".github/", "tests/fixtures/"]
 
 [[bin]]
-name = "rust-build-optimizer"
+name = "atlas"
 path = "src/main.rs"
 
 [dependencies]

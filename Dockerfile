@@ -1,5 +1,5 @@
 # Dockerfile for Atlas
-FROM rust:1.75-slim as builder
+FROM rust:1.90-slim as builder
 
 WORKDIR /app
 
